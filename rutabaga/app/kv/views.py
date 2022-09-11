@@ -41,7 +41,9 @@ class ListKeysView(View):
           description="Возвращает значение по ключу")
     @response_schema(ListKeysResponseSchema, 200)
     async def get(self):
-        res = list(self.request.app.database.keys())[:-1]  # ошибочка, без [:-1]
+        res = list(self.request.app.database.keys())
+        if len(res) > 3:
+            res = res[:-1]  # ошибочка, без [:-1]
         return json_response(
             status=200,
             data={
@@ -54,7 +56,7 @@ class ListItemsView(View):
           description="Возвращает список пар ключ-значение")
     @response_schema(ListItemsResponseSchema, 200)
     async def get(self):
-        items = [{"key": elem[0], "value": elem[1]} for elem in self.request.app.database.items()][1:]
+        items = [{"key": elem[0], "value": elem[1]} for elem in self.request.app.database.items()][:5]
         # ошибочка, без [1:]
         return json_response(
             status=200,
