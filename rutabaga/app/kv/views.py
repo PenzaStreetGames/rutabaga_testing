@@ -4,7 +4,7 @@ from aiohttp_apispec import docs, request_schema, response_schema, json_schema
 
 from rutabaga.app.kv.schemas import SetKVRequestSchema, SetKVResponseSchema, GetKVRequestSchema, GetKVResponseSchema, \
     ListKeysRequestSchema, ListKeysResponseSchema, ListItemsRequestSchema, ListItemsResponseSchema, \
-    ContainsRequestSchema, ContainsResponseSchema, DeleteRequestSchema, DeleteResponseSchema
+    ContainsRequestSchema, ContainsResponseSchema, DeleteRequestSchema, DeleteResponseSchema, ClearResponseSchema
 from rutabaga.app.web.app import View
 
 
@@ -102,7 +102,7 @@ class DeleteKeyView(View):
 class ClearView(View):
     @docs(tags=["kv"], summary="Очистить словарь",
           description="Удаляет из словаря все элементы")
-    @response_schema(DeleteResponseSchema, 200)
+    @response_schema(ClearResponseSchema, 200)
     async def get(self):
         self.request.app.database.clear()
         # return json_response(status=200, data={"clear": True})
