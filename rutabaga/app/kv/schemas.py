@@ -14,7 +14,7 @@ class ContainsSchema(Schema):
     contains = fields.Boolean(required=True)
 
 
-class GetKVRequestSchema(KeySchema, ContainsSchema):
+class GetKVRequestSchema(KeySchema):
     pass
 
 
@@ -43,7 +43,7 @@ class ClearRequestSchema(Schema):
     pass
 
 
-class GetKVResponseSchema(KeyValueSchema):
+class GetKVResponseSchema(KeyValueSchema, ContainsSchema):
     pass
 
 

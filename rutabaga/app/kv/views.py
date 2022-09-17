@@ -38,7 +38,7 @@ class GetValueByKeyView(View):
 
 class ListKeysView(View):
     @docs(tags=["kv"], summary="Получить список ключей",
-          description="Возвращает значение по ключу")
+          description="Возвращает список ключей хранилища")
     @response_schema(ListKeysResponseSchema, 200)
     async def get(self):
         res = list(self.request.app.database.keys())
